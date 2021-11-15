@@ -3,6 +3,8 @@ name: Docker Image CI
 on:
   push:
     branches: [ master ]
+    tags:
+      - "v*.*.*"
   pull_request:
     branches: [ master ]
 
@@ -22,7 +24,7 @@ jobs:
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag eahang/helloworld:$(date +%s)
+        run: docker build . --file Dockerfile --tag eahang/helloworld:latest
 
       - name: Docker Push
         run: docker push eahang/helloworld
